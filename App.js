@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View,Dimensions,ScrollView,Image, Pressable} from 'react-native';
+import { StyleSheet, Text, View,Dimensions,ScrollView,Image, Pressable,SafeAreaView} from 'react-native';
 const {width: SCREEN_WIDTH } = Dimensions.get("window");
 const {height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -19,13 +19,15 @@ export default function App() {
  ]);
   return (
     <View style={styles.container}>
+
       <View style={styles.mainTop}>
         <Text style={{fontSize: 35,textAlign:'left',paddingLeft:30,paddingTop:25}}>오늘의 파티</Text>
       </View>
-      <View style={styles.mainMiddle}>
+
+      <SafeAreaView style={styles.mainMiddle}>
       {listData.map((item)=>{
         return(
-     <ScrollView contentContainerStyle={{flex:1}}  key={item.key}>
+     <ScrollView style={{flex:1}}  key={item.key}>
       <View  style={styles.list}>
       <Pressable style={{flex:1,marginBottom:30,marginTop:30}}>
       <Image style={{flex:3}} source={{uri:'https://raw.githubusercontent.com/NOON-official/deliveryParty/main/assets/icon.png',}}/>   
@@ -40,10 +42,36 @@ export default function App() {
       </View>
       </Pressable>
       </View>
+
+     
+
       </ScrollView>
       
       )})}
+      </SafeAreaView>
+      <View style={styles.mainBottom}>
+      <Pressable style={{flex:1}}>
+      
+     <Image style={{flex:1}} source={{uri:'https://raw.githubusercontent.com/NOON-official/deliveryParty/main/assets/icon.png',}}/>   
+      
+     </Pressable>
+     <Pressable style={{flex:1}}>
+     
+     <Image style={{flex:1}} source={{uri:'https://raw.githubusercontent.com/NOON-official/deliveryParty/main/assets/icon.png',}}/>
+     
+     </Pressable>
+     <Pressable style={{flex:1}}>
+      
+     <Image style={{flex:1}} source={{uri:'https://raw.githubusercontent.com/NOON-official/deliveryParty/main/assets/icon.png',}}/>
+     
+     </Pressable>
+     <Pressable style={{flex:1}}>
+      
+     <Image style={{flex:1}} source={{uri:'https://raw.githubusercontent.com/NOON-official/deliveryParty/main/assets/icon.png',}}/>
+     
+     </Pressable>
       </View>
+     
       <StatusBar style="auto" />
       
     </View>
@@ -70,17 +98,14 @@ const styles = StyleSheet.create({
   },
 
   mainBottom :{
-    flex: 1,
-    backgroundColor: "white",
+    flex: 1.5,
+    backgroundColor:'white',
     width: SCREEN_WIDTH,
     borderStyle:'solid',
     borderWidth:1,
     flexDirection:'row'
   },
-  text :{
-color : "red",
-alignItems: 'center'
-  },
+
   list:{
       
       height: SCREEN_HEIGHT/6.5,
