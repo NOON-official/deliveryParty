@@ -1,10 +1,25 @@
-import Main from './MainPage';
-import {AppLoading} from 'expo';
-import Navigatior from './routes/MainStack';
+import * as React from 'react';
+import { Button, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import MainPage from './MainPage';
+import Popup from './Popup';
 
-export default function App(){
 
-  return(
-    <navigator/>
-  )
+
+const Stack = createStackNavigator();
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="MainPage" component={MainPage} />
+      <Stack.Screen name="Popup" component={Popup} />
+    </Stack.Navigator>
+  );
+}
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
 }

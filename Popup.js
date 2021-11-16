@@ -1,16 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useState,Component} from 'react';
 import { Button,StyleSheet, Text, View,Dimensions,ScrollView,Image, Pressable,SafeAreaView, TouchableOpacity} from 'react-native';
 import 'react-native-gesture-handler';
+import { Feather } from '@expo/vector-icons'; 
+import { FontAwesome } from '@expo/vector-icons'; 
+import { AntDesign } from '@expo/vector-icons';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 
 const {height: SCREEN_HEIGHT } = Dimensions.get("window");
 const {width: SCREEN_WIDTH } = Dimensions.get("window");
 
 
-export default function Popup(){
+export default function Popup ({navigation}){
+    
+      
     const [listData,setlistDate] = useState([
         {
-          icon:'https://raw.githubusercontent.com/NOON-official/deliveryParty/main/assets/icon.png',
+            icon:<AntDesign name="meh" size={24} color="black" />,
           participant:1,
           totalParticipant:5,
           Title:"떡볶이 시키실 분?",
@@ -28,8 +35,8 @@ export default function Popup(){
         return(
             <View style={styles.PopUpChat} key={item.key}>
              <View style={styles.Top}>
-            <TouchableOpacity  style={styles.Button} title="exit" color='white'>
-            <Text>뒤로가기</Text>
+            <TouchableOpacity  style={styles.Button} title="exit" color='white' onPress={()=>navigation.goBack()}>
+            <Feather name="x-circle" size={24} color="#C4C4C4" />
             </TouchableOpacity>
              </View>
              <View style={styles.Bottom}>
@@ -49,11 +56,13 @@ export default function Popup(){
                   <Text style={{flex:3, fontSize:15,marginLeft:10}}>{item.description}</Text>
               </View>
               <View style={styles.bottomButton}>
-                  <TouchableOpacity style={{flex:1, alignItems:'center'}}>
-                      <Text>Button</Text>
+                  <TouchableOpacity style={{flex:1, alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
+                      <View style={{alignItems:'center',justifyContent:'center'}}>{item.icon}</View>
+                      <Text style={{fontFamily:'Noto Sans KR',fontWeight:'700',marginLeft:5}}>{item.participant}/{item.totalParticipant}</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{flex:1, alignItems:'center'}}>
-                      <Text>Button</Text>
+                  <TouchableOpacity style={{flex:1, alignItems:'center',flexDirection:'row'}}>
+                  <FontAwesome name="send" size={24} color="black" />
+                      <Text style={{fontFamily:'Noto Sans KR',fontWeight:'700',marginLeft:5}}>채팅방 참여하기</Text>
                   </TouchableOpacity>
               </View>
               <View style={{flex:5}}></View>
@@ -66,6 +75,7 @@ export default function Popup(){
 
     )
 };
+
 
 const styles = StyleSheet.create({
     container: {
