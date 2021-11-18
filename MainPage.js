@@ -33,7 +33,7 @@ const {height: SCREEN_HEIGHT } = Dimensions.get("window");
     <View style={styles.container}>
 
       <View style={styles.mainTop}>
-        <Text style={{fontSize: 30,textAlign:'left',paddingLeft:30,paddingTop:25,fontFamily:'Noto Sans KR',fontStyle:'normal',fontWeight:'bold'}}>오늘의 파티</Text>
+        <Text style={{fontSize: 30,textAlign:'left',paddingLeft:30,paddingTop:25,fontStyle:'normal',fontWeight:'bold'}}>오늘의 파티</Text>
       </View>
 
       <SafeAreaView style={styles.mainMiddle}>
@@ -69,7 +69,7 @@ const {height: SCREEN_HEIGHT } = Dimensions.get("window");
       <Text style={{color:'#C4C4C4'}}>home</Text>
       
      </Pressable>
-     <Pressable style={{flex:1,justifyContent:'center', alignItems:'center',marginBottom:20}}>
+     <Pressable onPress={()=>navigation.navigate('Upload')} style={{flex:1,justifyContent:'center', alignItems:'center',marginBottom:20}}>
      
      <MaterialCommunityIcons name="progress-upload" size={35} color="#C4C4C4" />
      <Text  style={{color:'#C4C4C4'}}>upload</Text>

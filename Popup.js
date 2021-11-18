@@ -5,7 +5,8 @@ import 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons'; 
 import { AntDesign } from '@expo/vector-icons';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+
 
 
 const {height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -35,7 +36,7 @@ export default function Popup ({navigation}){
         return(
             <View style={styles.PopUpChat} key={item.key}>
              <View style={styles.Top}>
-            <TouchableOpacity  style={styles.Button} title="exit" color='white' onPress={()=>navigation.goBack()}>
+            <TouchableOpacity  style={styles.Button} title="exit" color='white' onPress={()=>navigation.navigate('UploadCancelPopup')}>
             <Feather name="x-circle" size={24} color="#C4C4C4" />
             </TouchableOpacity>
              </View>
@@ -56,13 +57,13 @@ export default function Popup ({navigation}){
                   <Text style={{flex:3, fontSize:15,marginLeft:10}}>{item.description}</Text>
               </View>
               <View style={styles.bottomButton}>
-                  <TouchableOpacity style={{flex:1, alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
+                  <TouchableOpacity style={{flex:1, alignItems:'center',flexDirection:'row',justifyContent:'center',borderRadius:20,borderColor:'a8b5ac',borderWidth:1,marginRight:10,marginLeft:20}}>
                       <View style={{alignItems:'center',justifyContent:'center'}}>{item.icon}</View>
-                      <Text style={{fontFamily:'Noto Sans KR',fontWeight:'700',marginLeft:5}}>{item.participant}/{item.totalParticipant}</Text>
+                      <Text style={{fontWeight:'700',marginLeft:5}}>{item.participant}/{item.totalParticipant}</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{flex:1, alignItems:'center',flexDirection:'row'}}>
-                  <FontAwesome name="send" size={24} color="black" />
-                      <Text style={{fontFamily:'Noto Sans KR',fontWeight:'700',marginLeft:5}}>채팅방 참여하기</Text>
+                  <TouchableOpacity style={{flex:1, alignItems:'center',flexDirection:'row',borderRadius:20, backgroundColor:'#FF480E',marginRight:20}}>
+                  <FontAwesome name="send" size={24} color="white" style={{marginLeft:15}} />
+                      <Text style={{fontWeight:'700',paddingLeft:10, color:'white'}}>채팅방 참여하기</Text>
                   </TouchableOpacity>
               </View>
               <View style={{flex:5}}></View>
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
         width:SCREEN_WIDTH/1.2,
         borderColor:'#bfc9c2',
       borderWidth:1,
-      borderRadius:30
+      borderRadius:20
         
     },
     Top:{
