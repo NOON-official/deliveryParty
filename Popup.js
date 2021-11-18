@@ -36,7 +36,7 @@ export default function Popup ({navigation}){
         return(
             <View style={styles.PopUpChat} key={item.key}>
              <View style={styles.Top}>
-            <TouchableOpacity  style={styles.Button} title="exit" color='white' onPress={()=>navigation.navigate('UploadCancelPopup')}>
+            <TouchableOpacity  style={styles.Button} title="exit" color='white' onPress={()=>navigation.navigate('MainPage')}>
             <Feather name="x-circle" size={24} color="#C4C4C4" />
             </TouchableOpacity>
              </View>
