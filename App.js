@@ -12,10 +12,10 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="MainPage" component={MainPage} />
-      <Stack.Screen name="Popup" component={Popup} />
-      <Stack.Screen name="Upload" component={Upload} />
-      <Stack.Screen name="UploadCancelPopup" component={UploadCancelPopup}/>
+      <Stack.Screen name="MainPage" component={MainPage} options={{title: "메인페이지"}} />
+      <Stack.Screen name="Popup" component={Popup} options={{title: "상세보기"}} />
+      <Stack.Screen name="Upload" component={Upload} options={{title: "업로드 페이지"}} />
+      <Stack.Screen name="UploadCancelPopup" component={UploadCancelPopup} options={{title: "업로드 삭제"}}/>
     </Stack.Navigator>
   );
 }

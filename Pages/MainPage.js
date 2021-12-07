@@ -24,7 +24,9 @@ import {styles} from '../styles/MainPageStyles';
       store:"미파닭",
       menu:"떡볶이",
       key:'1'
-    }
+    },
+    
+
   ]);
   
 
@@ -37,10 +39,11 @@ import {styles} from '../styles/MainPageStyles';
       </View>
 
       <SafeAreaView style={styles.mainMiddle}>
+      <ScrollView style={{flex:1}} >
       {listData.map((item)=>{
         return(
-     <ScrollView style={{flex:1}}  key={item.key}>
-     <TouchableOpacity onPress={()=>navigation.navigate('Popup')} style={styles.list}>
+    
+     <TouchableOpacity  key={item.key} onPress={()=>navigation.navigate('Popup')} style={styles.list}>
       <View style={styles.mainMiddleView1}>
       <View style={styles.mainMiddleIcon}>{item.icon}</View> 
       <Text style={styles.mainMiddleText1}> 1/5</Text> 
@@ -57,10 +60,10 @@ import {styles} from '../styles/MainPageStyles';
       </TouchableOpacity>
 
      
-
+      )})}
       </ScrollView>
       
-      )})}
+     
       </SafeAreaView>
       <View style={styles.mainBottom}>
       <Pressable style={styles.mainBottomButtons}>
