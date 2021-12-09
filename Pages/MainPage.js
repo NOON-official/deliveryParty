@@ -8,7 +8,6 @@ import { AntDesign } from '@expo/vector-icons';
 import {styles} from '../styles/MainPageStyles';
 
 
-
  export default function MainPage({navigation}){
 
 
@@ -24,7 +23,9 @@ import {styles} from '../styles/MainPageStyles';
       store:"미파닭",
       menu:"떡볶이",
       key:'1'
-    }
+    },
+    
+
   ]);
   
 
@@ -37,10 +38,11 @@ import {styles} from '../styles/MainPageStyles';
       </View>
 
       <SafeAreaView style={styles.mainMiddle}>
+      <ScrollView style={{flex:1}} >
       {listData.map((item)=>{
         return(
-     <ScrollView style={{flex:1}}  key={item.key}>
-     <TouchableOpacity onPress={()=>navigation.navigate('Popup')} style={styles.list}>
+    
+     <TouchableOpacity  key={item.key} onPress={()=>navigation.navigate('Popup')} style={styles.list}>
       <View style={styles.mainMiddleView1}>
       <View style={styles.mainMiddleIcon}>{item.icon}</View> 
       <Text style={styles.mainMiddleText1}> 1/5</Text> 
@@ -57,15 +59,15 @@ import {styles} from '../styles/MainPageStyles';
       </TouchableOpacity>
 
      
-
+      )})}
       </ScrollView>
       
-      )})}
+     
       </SafeAreaView>
       <View style={styles.mainBottom}>
-      <Pressable style={styles.mainBottomButtons}>
+      <Pressable onPress={()=>navigation.navigate('MainPage')} style={styles.mainBottomButtons}>
       
-      <Entypo  name="home"  size={35} color="#C4C4C4" /> 
+      <Entypo  name="home"  size={35} color="#FF480E" /> 
       <Text style={styles.mainBottomText}>home</Text>
       
      </Pressable>
@@ -80,7 +82,7 @@ import {styles} from '../styles/MainPageStyles';
      <Text  style={styles.mainBottomText}>recent</Text>
      
      </Pressable>
-     <Pressable style={styles.mainBottomButtons}>
+     <Pressable onPress={()=>navigation.navigate('MyPage')} style={styles.mainBottomButtons}>
       
      <Octicons name="person" size={35} color="#C4C4C4" />
      <Text style={styles.mainBottomText}>mypage</Text>
