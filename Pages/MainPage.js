@@ -8,7 +8,6 @@ import { AntDesign } from '@expo/vector-icons';
 import {styles} from '../styles/MainPageStyles';
 
 
-
  export default function MainPage({navigation}){
 
 
@@ -66,9 +65,9 @@ import {styles} from '../styles/MainPageStyles';
      
       </SafeAreaView>
       <View style={styles.mainBottom}>
-      <Pressable style={styles.mainBottomButtons}>
+      <Pressable onPress={()=>navigation.navigate('MainPage')} style={styles.mainBottomButtons}>
       
-      <Entypo  name="home"  size={35} color="#C4C4C4" /> 
+      <Entypo  name="home"  size={35} color="#FF480E" /> 
       <Text style={styles.mainBottomText}>home</Text>
       
      </Pressable>
@@ -83,7 +82,7 @@ import {styles} from '../styles/MainPageStyles';
      <Text  style={styles.mainBottomText}>recent</Text>
      
      </Pressable>
-     <Pressable style={styles.mainBottomButtons}>
+     <Pressable onPress={()=>navigation.navigate('MyPage')} style={styles.mainBottomButtons}>
       
      <Octicons name="person" size={35} color="#C4C4C4" />
      <Text style={styles.mainBottomText}>mypage</Text>

@@ -5,6 +5,7 @@ import MainPage from './Pages/MainPage';
 import Popup from './Pages/Popup';
 import Upload from './Pages/Upload';
 import UploadCancelPopup from './Pages/UploadCancelPopup'
+import MyPage from './Pages/MyPage';
 
 
 
@@ -16,6 +17,7 @@ function MyStack() {
       <Stack.Screen name="Popup" component={Popup} options={{title: "상세보기"}} />
       <Stack.Screen name="Upload" component={Upload} options={{title: "업로드 페이지"}} />
       <Stack.Screen name="UploadCancelPopup" component={UploadCancelPopup} options={{title: "업로드 삭제"}}/>
+      <Stack.Screen name="MyPage" component={MyPage} options={{title:"마이페이지"}}/>
     </Stack.Navigator>
   );
 }
