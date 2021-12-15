@@ -6,7 +6,8 @@ import Popup from './Pages/Popup';
 import Upload from './Pages/Upload';
 import UploadCancelPopup from './Pages/UploadCancelPopup'
 import MyPage from './Pages/MyPage';
-
+import Login from "./components/Login/Login";
+import PhoneAuth from "./components/Login/PhoneAuth";
 
 
 const Stack = createStackNavigator();

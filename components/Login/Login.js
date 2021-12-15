@@ -1,164 +1,84 @@
 import React from "react";
-import {
-  Text,
-  View,
-  TextInput,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
-  Dimensions,
-} from "react-native";
-
-import {
-  FirebaseRecaptchaVerifierModal,
-  FirebaseRecaptchaBanner,
-} from "expo-firebase-recaptcha";
+import useState from "react";
+import { Text, View, Button, Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
-
-import { initializeApp } from "firebase/app";
-import { getAuth, PhoneAuthProvider } from "firebase/auth";
 import NickNameData from "./NickNameData.json";
-import { styles } from "../styles/Styles";
+import DropDownPicker from "react-native-dropdown-picker";
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBWmpq9Gkbp5JbciuXkJ1TcvESJo8_evRI",
-//   authDomain: "deliveryparty-c7859.firebaseapp.com",
-//   projectId: "deliveryparty-c7859",
-//   storageBucket: "deliveryparty-c7859.appspot.com",
-//   messagingSenderId: "150626721997",
-//   appId: "1:150626721997:web:8f199b18b16b8579de4984",
-//   measurementId: "G-9EHXCH166J",
-// };
-
-// try {
-//   initializeApp({ firebaseConfig });
-// } catch (err) {
-//   // ignore app already initialized error in snack
-// }
-
-export default function Login() {
+const randomName = (NickNameData) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.mainTop}></View>
-      <View style={styles.mainMiddle}>
-        <View style={styles.list}>
-          <Text>
-            {NickNameData.determiners[
-              Math.floor(Math.random() * NickNameData.determiners.length)
-            ] +
-              " " +
-              NickNameData.animals[
-                Math.floor(Math.random() * NickNameData.animals.length)
-              ]}
-          </Text>
+    NickNameData.determiners[
+      Math.floor(Math.random() * NickNameData.determiners.length)
+    ] +
+    " " +
+    NickNameData.animals[
+      Math.floor(Math.random() * NickNameData.animals.length)
+    ]
+  );
+};
+
+export default function Login({ navigation }) {
+  const [dong, setDong] = React.useState("A");
+  const [floor, setFloor] = React.useState(1);
+  const [nickName, setNickName] = React.useState(randomName(NickNameData));
+  const changeRandomNickName = () => {
+    setNickName(randomName(NickNameData));
+  };
+
+  return (
+    <View>
+      <StatusBar style="auto" />
+      <View style={{ alignItems: "center" }}>
+        <View style={{ marginTop: 80, flexDirection: "row" }}>
+          <View>
+            <Text>{nickName}</Text>
+          </View>
+          <View style={{ paddingLeft: 20 }}>
+            <Button
+              title="이름 새로고침"
+              onPress={() => changeRandomNickName()}
+            />
+          </View>
+        </View>
+        <View style={{ flexDirection: "row", marginTop: 20 }}>
+          <DropDownPicker
+            items={[
+              { label: "A동", value: "A" },
+              { label: "B동", value: "B" },
+              { label: "C동", value: "C" },
+              { label: "D동", value: "D" },
+              { label: "E동", value: "E" },
+            ]}
+            defaultIndex={0}
+            containerStyle={{ height: 40 }}
+            onChangeItem={(item) => setDong(item.value)}
+          />
+          <DropDownPicker
+            items={[
+              { label: "1층", value: 1 },
+              { label: "2층", value: 2 },
+              { label: "3층", value: 3 },
+              { label: "4층", value: 4 },
+              { label: "5층", value: 5 },
+              { label: "6층", value: 6 },
+              { label: "7층", value: 7 },
+              { label: "8층", value: 8 },
+              { label: "9층", value: 9 },
+              { label: "10층", value: 10 },
+              { label: "11층", value: 11 },
+            ]}
+            defaultIndex={0}
+            containerStyle={{ height: 40 }}
+            onChangeItem={(item) => setFloor(item.value)}
+          />
         </View>
       </View>
-      <View style={styles.mainBottom}>
-        <Text></Text>
+      <View style={{ padding: 60, marginTop: 100 }}>
+        <Button
+          title="본인인증 및 로그인"
+          onPress={() => navigation.navigate("PhoneAuth")}
+        ></Button>
       </View>
-      <StatusBar style="auto" />
     </View>
   );
 }
-
-// const recaptchaVerifier = React.useRef(null);
-// const [phoneNumber, setPhoneNumber] = React.useState();
-// const [verificationId, setVerificationId] = React.useState();
-// const [verificationCode, setVerificationCode] = React.useState();
-// const [message, showMessage] = React.useState(
-//   !firebaseConfig || Platform.OS === "web"
-//     ? {
-//         text: "To get started, provide a valid firebase config in App.js and open this snack on an iOS or Android device.",
-//       }
-//     : undefined
-// );
-// const attemptInvisibleVerification = true;
-// return (
-//   <View style={{ padding: 20, marginTop: 50 }}>
-//     <FirebaseRecaptchaVerifierModal
-//       ref={recaptchaVerifier}
-//       firebaseConfig={firebaseConfig}
-//       attemptInvisibleVerification={attemptInvisibleVerification}
-//     />
-//     <Text style={{ marginTop: 20 }}>Enter phone number</Text>
-//     <TextInput
-//       style={{ marginVertical: 10, fontSize: 17 }}
-//       placeholder="+82 10 1234 5678"
-//       autoFocus
-//       autoCompleteType="tel"
-//       keyboardType="phone-pad"
-//       textContentType="telephoneNumber"
-//       onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
-//     />
-//     <Button
-//       title="Send Verification Code"
-//       disabled={!phoneNumber}
-//       onPress={async () => {
-//         // The FirebaseRecaptchaVerifierModal ref implements the
-//         // FirebaseAuthApplicationVerifier interface and can be
-//         // passed directly to `verifyPhoneNumber`.
-//         try {
-//           const phoneProvider = new PhoneAuthProvider();
-//           phoneProvider._reset = {};
-//           const verificationId = await phoneProvider.verifyPhoneNumber(
-//             phoneNumber,
-//             recaptchaVerifier.current
-//           );
-//           setVerificationId(verificationId);
-//           showMessage({
-//             text: "Verification code has been sent to your phone.",
-//           });
-//         } catch (err) {
-//           showMessage({ text: `Error: ${err.message}`, color: "red" });
-//         }
-//       }}
-//     />
-//     <Text style={{ marginTop: 20 }}>Enter Verification code</Text>
-//     <TextInput
-//       style={{ marginVertical: 10, fontSize: 17 }}
-//       editable={!!verificationId}
-//       placeholder="123456"
-//       onChangeText={setVerificationCode}
-//     />
-//     <Button
-//       title="Confirm Verification Code"
-//       disabled={!verificationId}
-//       onPress={async () => {
-//         try {
-//           const phoneProvider = new PhoneAuthProvider();
-//           const credential = phoneProvider.credential(
-//             verificationId,
-//             verificationCode
-//           );
-//           const auth = getAuth();
-//           await auth.signInWithCredential(credential);
-//           showMessage({ text: "Phone authentication successful 👍" });
-//         } catch (err) {
-//           showMessage({ text: `Error: ${err.message}`, color: "red" });
-//         }
-//       }}
-//     />
-//     {message ? (
-//       <TouchableOpacity
-//         style={[
-//           StyleSheet.absoluteFill,
-//           { backgroundColor: 0xffffffee, justifyContent: "center" },
-//         ]}
-//         onPress={() => showMessage(undefined)}
-//       >
-//         <Text
-//           style={{
-//             color: message.color || "blue",
-//             fontSize: 17,
-//             textAlign: "center",
-//             margin: 20,
-//           }}
-//         >
-//           {message.text}
-//         </Text>
-//       </TouchableOpacity>
-//     ) : undefined}
-//     {attemptInvisibleVerification && <FirebaseRecaptchaBanner />}
-//   </View>
-// );

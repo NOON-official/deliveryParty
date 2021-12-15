@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
+import { Text, View, Dimensions, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
 import { styles } from "./styles/Styles";
 
 export default function MainPage() {
