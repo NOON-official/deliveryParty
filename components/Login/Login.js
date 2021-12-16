@@ -1,9 +1,10 @@
 import React from "react";
 import useState from "react";
-import { Text, View, Button, Platform } from "react-native";
+import { Text, View, Button, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import NickNameData from "./NickNameData.json";
 import DropDownPicker from "react-native-dropdown-picker";
+import Logo from "../../logoImage/smile(red).png";
 
 const randomName = (NickNameData) => {
   return (
@@ -28,6 +29,10 @@ export default function Login({ navigation }) {
   return (
     <View>
       <StatusBar style="auto" />
+      <View style={{ alignItems: "center", marginTop: 20 }}>
+        <Image source={Logo}></Image>
+      </View>
+
       <View style={{ alignItems: "center" }}>
         <View style={{ marginTop: 80, flexDirection: "row" }}>
           <View>

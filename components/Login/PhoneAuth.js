@@ -16,24 +16,21 @@ import {
   FirebaseRecaptchaBanner,
 } from "expo-firebase-recaptcha";
 import { StatusBar } from "expo-status-bar";
-import { initializeApp } from "firebase/app";
-import { getAuth, PhoneAuthProvider } from "firebase/auth";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBWmpq9Gkbp5JbciuXkJ1TcvESJo8_evRI",
-  authDomain: "deliveryparty-c7859.firebaseapp.com",
-  projectId: "deliveryparty-c7859",
-  storageBucket: "deliveryparty-c7859.appspot.com",
-  messagingSenderId: "150626721997",
-  appId: "1:150626721997:web:8f199b18b16b8579de4984",
-  measurementId: "G-9EHXCH166J",
-};
+import { initializeApp, getApp } from "firebase/app";
+import {
+  getAuth,
+  PhoneAuthProvider,
+  signInWithCredential,
+} from "firebase/auth";
+import firebaseConfig from "./firebaseConfig";
 
 try {
-  initializeApp({ firebaseConfig });
+  initializeApp(firebaseConfig);
 } catch (err) {
   // ignore app already initialized error in snack
 }
+
+const auth = getAuth();
 
 export default function PhoneAuth() {
   const recaptchaVerifier = React.useRef(null);
@@ -77,17 +74,17 @@ export default function PhoneAuth() {
           // FirebaseAuthApplicationVerifier interface and can be
           // passed directly to `verifyPhoneNumber`.
           try {
-            const phoneProvider = new PhoneAuthProvider();
-            phoneProvider._reset = {};
+            const phoneProvider = new PhoneAuthProvider(auth);
             const verificationId = await phoneProvider.verifyPhoneNumber(
               phoneNumber,
               recaptchaVerifier.current
             );
             setVerificationId(verificationId);
             showMessage({
-              text: "Verification code has been sent to your phone.",
+              text: "인증번호가 전송되었습니다.",
             });
           } catch (err) {
+            console.log(err);
             showMessage({ text: `Error: ${err.message}`, color: "red" });
           }
         }}
@@ -104,24 +101,30 @@ export default function PhoneAuth() {
         disabled={!verificationId}
         onPress={async () => {
           try {
-            const phoneProvider = new PhoneAuthProvider();
-            const credential = phoneProvider.credential(
+            const credential = PhoneAuthProvider.credential(
               verificationId,
               verificationCode
             );
-            const auth = getAuth();
-            await auth.signInWithCredential(credential);
-            showMessage({ text: "Phone authentication successful 👍" });
+            await signInWithCredential(auth, credential);
+            showMessage({ text: "인증 성공했습니다 👍" });
           } catch (err) {
             showMessage({ text: `Error: ${err.message}`, color: "red" });
           }
+          
         }}
       />
+
+      {attemptInvisibleVerification && <FirebaseRecaptchaBanner />}
+
       {message ? (
         <TouchableOpacity
           style={[
-            StyleSheet.absoluteFill,
-            { backgroundColor: 0xffffffee, justifyContent: "center" },
+            {
+              backgroundColor: 0xffffffee,
+              justifyContent: "center",
+              padding: 10,
+              marginTop: 20,
+            },
           ]}
           onPress={() => showMessage(undefined)}
         >
@@ -137,7 +140,6 @@ export default function PhoneAuth() {
           </Text>
         </TouchableOpacity>
       ) : undefined}
-      {attemptInvisibleVerification && <FirebaseRecaptchaBanner />}
     </View>
   );
 }
