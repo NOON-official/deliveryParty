@@ -13,11 +13,11 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Login"
         component={Login}
         options={{ title: "첫 화면 페이지" }}
-      /> */}
+      />
       <Stack.Screen
         name="PhoneAuth"
         component={PhoneAuth}
