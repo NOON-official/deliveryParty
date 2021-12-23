@@ -14,21 +14,48 @@ import 'react-native-gesture-handler';
 import {Feather} from '@expo/vector-icons';
 import {styles} from '../styles/UploadStyle';
 import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Upload({navigation}) {
-
-    const [valueTitle, onChangeTextTitle] = useState()
+    const [texts, setTexts] = useState({});
+    const [valueTitle, onChangeTextTitle] = useState();
     const onChangeTitle = (title) => onChangeTextTitle(title);
-    const [valueStore, onChangeTextStore] = useState()
+    const [valueStore, onChangeTextStore] = useState();
     const onChangeStore = (store) => onChangeTextStore(store);
-    const [valueMenu, onChangeTextMenu] = useState()
+    const [valueMenu, onChangeTextMenu] = useState();
     const onChangeMenu = (menu) => onChangeTextMenu(menu);
-    const [valueDescription, onChangeTextDescription] = useState()
+    const [valueDescription, onChangeTextDescription] = useState();
     const onChangeDescription = (description) => onChangeTextDescription(
         description
     );
-    const [texts, setTexts] = useState({})
-    const [ImagePick, setImage] = useState()
+    const [ImagePick, setImage] = useState();
+
+    const addDatas = (
+        icons,
+        participants,
+        totalparticipants,
+        Titles,
+        descriptions,
+        names,
+        times,
+        stores,
+        menus,
+        keys
+    ) => {
+        return (Object.assign(texts, {
+            icon: icons,
+            participant: participants,
+            totalParticipant: totalparticipants,
+            Title: Titles,
+            description: descriptions,
+            name: names,
+            time: times,
+            store: stores,
+            menu: menus,
+            key: keys
+        }));
+
+    };
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -56,45 +83,52 @@ export default function Upload({navigation}) {
             setImage(result.uri);
         }
     };
-    function yes(){const newAddText=Object.assign(
-        texts, 
-       {
-        [Date.now()]: {
-            title: valueTitle,
-            store: valueStore,
-            menu: valueMenu,
-            description: valueDescription,
-            image: ImagePick
-        }
-    })
-  setTexts(newAddText)
-console.log("texts : ", texts)
- navigation.navigate('MainPage');
+    function yes() {
+        addDatas(
+            null,
+            3,
+            5,
+            valueTitle,
+            valueDescription,
+            "name",
+            Date.now(),
+            valueStore,
+            valueMenu,
+            Date.now()
+        );
+        setData(texts);
+        navigation.navigate('MainPage');
 
-    
-}; 
-    
+    };
+
+    const setData = async (Data) => {
+        try {
+            const JData = JSON.stringify(Data);
+            await AsyncStorage.setItem('Data:Date.now()', JData);
+            console.log("setData", JData)
+        } catch (error) {
+            // Error saving data
+        }
+    };
     const addText = () => {
         if (valueTitle && valueStore && valueMenu && valueDescription) {
             Keyboard.dismiss();
-            if(ImagePick==null){
-            Alert.alert('사진없이 업로드 하시겠습니까?', '', [
-                {
-                    text: '예',
-                    onPress: () => yes()
+            if (ImagePick == null) {
+                Alert.alert('사진없이 업로드 하시겠습니까?', '', [
+                    {
+                        text: '예',
+                        onPress: () => yes()
 
-                }, {
-                    text: '아니오',
-                    onPress: () => console.log("no"),
-                    style: 'cancel'
-                }
-            ]);
-                              }
-            else{
+                    }, {
+                        text: '아니오',
+                        onPress: () => console.log("no"),
+                        style: 'cancel'
+                    }
+                ]);
+            } else {
                 yes()
-            }    
-        } 
-        else {
+            }
+        } else {
             alert("제목, 가게이름, 메뉴, 설명은 필수 입력사항입니다.")
         }
 
