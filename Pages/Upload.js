@@ -83,7 +83,7 @@ export default function Upload({navigation}) {
             setImage(result.uri);
         }
     };
-    function yes() {
+    function uploadData() {
         addDatas(
             null,
             3,
@@ -117,7 +117,7 @@ export default function Upload({navigation}) {
                 Alert.alert('사진없이 업로드 하시겠습니까?', '', [
                     {
                         text: '예',
-                        onPress: () => yes()
+                        onPress: () => uploadData()
 
                     }, {
                         text: '아니오',
