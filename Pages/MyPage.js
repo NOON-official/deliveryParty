@@ -15,10 +15,10 @@ export default function MyPage({navigation}){
         <View style={styles.container}>
             
             <View style={styles.mainTop}>
-            <View style={{flex:5,alignItems:'center',justifyContent:"flex-end", marginBottom:20}}>
+            <View style={styles.mainTopIcon}>
             <AntDesign name="meh" size={80} color="black" />
             </View> 
-            <View style={{flex:3, alignItems:"center",justifyContent:"flex-start"}}>
+            <View style={styles.mainTopName}>
              <Text style={{fontSize:20}}>삐딱한 삐딱구리</Text>
              <Text style={{fontSize:17,justifyContent:'space-between'}}><EvilIcons name="location" size={18} color="black" />B동 25층</Text>
             </View>
@@ -27,11 +27,11 @@ export default function MyPage({navigation}){
             <View style={{flex:0.3,backgroundColor:'#ECECEC' }}>
             </View>
             <SafeAreaView style={styles.mainMiddle}>
-            <View style={{flex:1, alignItems:'baseline', justifyContent:'center', marginLeft:30, marginTop:30,borderBottomColor:'#ECECEC', borderBottomWidth:2, marginRight:30, marginBottom:15}}>
-            <Text style={{fontSize:25, fontWeight:'bold'}} >마이페이지</Text>
+            <View style={styles.mainMiddle2}>
+            <Text style={styles.mainMiddleText1} >마이페이지</Text>
             </View>
-            <View style={{flex:3.5, marginLeft:30}}>
-            <Text style={{color:'#777777', fontWeight:"400", fontSize:17}}>회원정보 수정 <AntDesign name="right" size={17} color="#C4C4C4" /></Text>
+            <View style={styles.mainMiddle3}>
+            <Text style={styles.mainMiddleText2}>회원정보 수정 <AntDesign name="right" size={17} color="#C4C4C4" /></Text>
             </View>
             </SafeAreaView>
             
