@@ -22,7 +22,7 @@ import {
   PhoneAuthProvider,
   signInWithCredential,
 } from "firebase/auth";
-import firebaseConfig from "./firebaseConfig";
+import firebaseConfig from "../../config/firebaseConfig";
 
 try {
   initializeApp(firebaseConfig);
