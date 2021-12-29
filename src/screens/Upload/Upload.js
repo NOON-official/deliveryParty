@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import 'react-native-gesture-handler';
 import {Feather} from '@expo/vector-icons';
-import {styles} from '../styles/UploadStyle';
+import {styles} from '../../styles/Upload';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -173,7 +173,7 @@ export default function Upload({navigation}) {
                 <TextInput
                     style={styles.textIputDescription}
                     onChangeText={onChangeDescription}
-                    multiline="multiline"
+                    multiline={true}
                     placeholder="설명을 입력해주세요"
                     value={valueDescription}></TextInput>
             </View>

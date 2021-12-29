@@ -5,7 +5,7 @@ import 'react-native-gesture-handler';
 import {Feather} from '@expo/vector-icons';
 import {FontAwesome} from '@expo/vector-icons';
 import {AntDesign} from '@expo/vector-icons';
-import {styles} from '../styles/PopupStyle';
+import {styles} from '../../styles/Popup';
 
 export default function Popup({navigation}) {
 

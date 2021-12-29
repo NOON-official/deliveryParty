@@ -2,10 +2,10 @@ import React from "react";
 import useState from "react";
 import { Text, View, Button, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import NickNameData from "./NickNameData.json";
+import NickNameData from "../../assets/data/NickNameData.json";
 import DropDownPicker from "react-native-dropdown-picker";
 import { WithLocalSvg } from "react-native-svg";
-import Logo from "../../logoImage/smile(red).svg";
+import Logo from "../../assets/images/logoImage/smile(red).svg";
 
 const randomName = (NickNameData) => {
   return (

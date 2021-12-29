@@ -15,7 +15,7 @@ import {Entypo} from '@expo/vector-icons';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {Octicons} from '@expo/vector-icons';
 import {AntDesign} from '@expo/vector-icons';
-import {styles} from '../styles/MainPageStyles';
+import {styles} from '../../styles/MainPage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function MainPage({navigation}) {
     const [Datas, setDatas] = useState([]);

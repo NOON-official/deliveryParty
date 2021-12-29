@@ -18,19 +18,12 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { initializeApp, getApp } from "firebase/app";
 import {
-  getAuth,
   PhoneAuthProvider,
   signInWithCredential,
 } from "firebase/auth";
-import firebaseConfig from "../../config/firebaseConfig";
+import { firebaseConfig, firebaseAuth } from "../../config/firebaseConfig";
 
-try {
-  initializeApp(firebaseConfig);
-} catch (err) {
-  // ignore app already initialized error in snack
-}
 
-const auth = getAuth();
 
 export default function PhoneAuth() {
   const recaptchaVerifier = React.useRef(null);
@@ -74,7 +67,7 @@ export default function PhoneAuth() {
           // FirebaseAuthApplicationVerifier interface and can be
           // passed directly to `verifyPhoneNumber`.
           try {
-            const phoneProvider = new PhoneAuthProvider(auth);
+            const phoneProvider = new PhoneAuthProvider(firebaseAuth);
             const verificationId = await phoneProvider.verifyPhoneNumber(
               phoneNumber,
               recaptchaVerifier.current
@@ -105,7 +98,7 @@ export default function PhoneAuth() {
               verificationId,
               verificationCode
             );
-            await signInWithCredential(auth, credential);
+            await signInWithCredential(firebaseAuth, credential);
             showMessage({ text: "인증 성공했습니다 👍" });
           } catch (err) {
             showMessage({ text: `Error: ${err.message}`, color: "red" });
