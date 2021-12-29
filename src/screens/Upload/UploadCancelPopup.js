@@ -2,9 +2,9 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Text, View, Image, TouchableOpacity } from "react-native";
 import "react-native-gesture-handler";
-import { styles } from "../styles/UploadCancelPopupStyle";
+import { styles } from "../../styles/UploadCancelPopup";
 import { SvgCssUri } from "react-native-svg";
-import SadLogo from "../logoImage/sad.svg"
+import SadLogo from "../../assets/images/logoImage/sad.svg"
 
 export default function UploadCancelPopup({ navigation }) {
   return (

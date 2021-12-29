@@ -5,7 +5,7 @@ import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Octicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import {styles} from '../styles/MyPageStyle';
+import {styles} from '../../styles/MyPage';
 import { EvilIcons } from '@expo/vector-icons'; 
 
 export default function MyPage({navigation}){
